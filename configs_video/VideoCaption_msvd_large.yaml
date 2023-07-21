@@ -1,0 +1,34 @@
+alpha: 0.4
+bert_config: configs/config_bert_large_text.json
+concat_last_layer: true
+clip_name: "ViT-L-14"
+distill: true
+embed_dim: 256
+eos: '[SEP]'
+
+prompt: "a video of"
+
+optimizer: {lr1: 2e-5, lr2: 2e-6, opt: adamW, weight_decay: 0.02, betas: [0.9, 0.999]}
+# queue_size: 65536
+schedular: {cooldown_epochs: 0, decay_rate: 1, epochs: 10, lr: 2e-5, min_lr: 1e-06,
+  sched: cosine_step, warmup_epochs: 200, warmup_lr: 1e-06}
+
+# Data
+read_local_data: true
+train_file: 'datasets/annotations_all/msvd_caption/train.jsonl'
+test_file: 'datasets/annotations_all/msvd_caption/test.jsonl'
+video_root: "datasets/MSVD/MSVD_Videos"
+
+beam_size: 5
+
+image_res: 224
+model_num_frames: 16
+test_num_frames: 16
+
+vision_width: 1024
+use_checkpoint: true
+k_test: 128
+
+batch_size_train: 4
+batch_size_test: 4
+num_workers: 24
